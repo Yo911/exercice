@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Builder
 @Value
 @AllArgsConstructor
@@ -13,4 +16,11 @@ public class Client implements IClient {
     String id;
     String firstName;
     String lastName;
+    @Builder.Default
+    List<Product> shoppingCart = new ArrayList<>();
+
+    @Override
+    public ClientType getClientType() {
+        return ClientType.PARTICULAR;
+    }
 }

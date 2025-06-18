@@ -12,7 +12,7 @@ import lombok.Value;
 public class Product {
     String name;
     String quality;
-    long price;
+    Map<ClientType, Long> price;
     @Builder.Default
     String currency = "EUR";
 }

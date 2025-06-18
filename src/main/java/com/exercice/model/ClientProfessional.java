@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Builder
 @Value
 @AllArgsConstructor
@@ -17,6 +20,8 @@ public class ClientProfessional implements IClient {
     String tva;
     String siren;
     Long annualTurnover; // à voir pour un BigDecimal
+    @Builder.Default
+    List<Product> shoppingCart = new ArrayList<>();
 
     @Override
     public boolean isProfessional() {
@@ -26,5 +31,12 @@ public class ClientProfessional implements IClient {
     @Override
     public boolean isOverTenMillions() {
         return annualTurnover != null && TEN_MILLIONS_ANNUAL_TURNOVER <= annualTurnover;
+    }
+
+    @Override
+    public ClientType getClientType() {
+        return isOverTenMillions() ?
+                ClientType.PRO_VIP:
+                ClientType.PRO;
     }
 }
